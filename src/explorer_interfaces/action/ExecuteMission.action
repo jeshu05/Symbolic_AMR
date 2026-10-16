@@ -1,0 +1,15 @@
+string mission_id
+string mission_config_json
+---
+bool success
+string completion_reason
+string[] completed_objectives
+float64 total_path_length
+float64 total_duration_seconds
+uint32 targets_visited
+---
+string current_state
+string current_objective
+float64 remaining_energy_percent
+uint32 completed_objective_count
+ExplorationTarget current_target

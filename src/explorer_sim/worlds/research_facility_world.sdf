@@ -1,0 +1,738 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="research_facility_world">
+    <physics name="1ms" type="ode">
+      <max_step_size>0.003</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <light name="sun" type="directional">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 20 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.3 0.2 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>60 60</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>60 60</size></plane></geometry>
+          <material>
+            <ambient>0.82 0.82 0.82 1</ambient>
+            <diffuse>0.82 0.82 0.82 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="research_facility">
+      <static>true</static>
+      <link name="walls">
+        
+        <!-- outer_wall_n -->
+        <collision name="outer_wall_n_col">
+          <pose>0.00 18.00 0.90 0 0 0</pose>
+          <geometry><box><size>36.30 0.30 1.80</size></box></geometry>
+        </collision>
+        <visual name="outer_wall_n_vis">
+          <pose>0.00 18.00 0.90 0 0 0</pose>
+          <geometry><box><size>36.30 0.30 1.80</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.55 1</diffuse></material>
+        </visual>
+        <!-- outer_wall_s -->
+        <collision name="outer_wall_s_col">
+          <pose>0.00 -18.00 0.90 0 0 0</pose>
+          <geometry><box><size>36.30 0.30 1.80</size></box></geometry>
+        </collision>
+        <visual name="outer_wall_s_vis">
+          <pose>0.00 -18.00 0.90 0 0 0</pose>
+          <geometry><box><size>36.30 0.30 1.80</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.55 1</diffuse></material>
+        </visual>
+        <!-- outer_wall_e -->
+        <collision name="outer_wall_e_col">
+          <pose>18.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.30 36.30 1.80</size></box></geometry>
+        </collision>
+        <visual name="outer_wall_e_vis">
+          <pose>18.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.30 36.30 1.80</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.55 1</diffuse></material>
+        </visual>
+        <!-- outer_wall_w -->
+        <collision name="outer_wall_w_col">
+          <pose>-18.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.30 36.30 1.80</size></box></geometry>
+        </collision>
+        <visual name="outer_wall_w_vis">
+          <pose>-18.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.30 36.30 1.80</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.55 1</diffuse></material>
+        </visual>
+        <!-- hub_nw_h -->
+        <collision name="hub_nw_h_col">
+          <pose>-2.30 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_nw_h_vis">
+          <pose>-2.30 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_ne_h -->
+        <collision name="hub_ne_h_col">
+          <pose>2.30 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_ne_h_vis">
+          <pose>2.30 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_sw_h -->
+        <collision name="hub_sw_h_col">
+          <pose>-2.30 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_sw_h_vis">
+          <pose>-2.30 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_se_h -->
+        <collision name="hub_se_h_col">
+          <pose>2.30 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_se_h_vis">
+          <pose>2.30 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>2.40 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_wn_v -->
+        <collision name="hub_wn_v_col">
+          <pose>-3.50 2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_wn_v_vis">
+          <pose>-3.50 2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_ws_v -->
+        <collision name="hub_ws_v_col">
+          <pose>-3.50 -2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_ws_v_vis">
+          <pose>-3.50 -2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_en_v -->
+        <collision name="hub_en_v_col">
+          <pose>3.50 2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_en_v_vis">
+          <pose>3.50 2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- hub_es_v -->
+        <collision name="hub_es_v_col">
+          <pose>3.50 -2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+        </collision>
+        <visual name="hub_es_v_vis">
+          <pose>3.50 -2.30 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.40 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- med_wall_n -->
+        <collision name="med_wall_n_col">
+          <pose>11.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="med_wall_n_vis">
+          <pose>11.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.3 0.8 0.5 1</diffuse></material>
+        </visual>
+        <!-- med_wall_e -->
+        <collision name="med_wall_e_col">
+          <pose>15.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="med_wall_e_vis">
+          <pose>15.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.3 0.8 0.5 1</diffuse></material>
+        </visual>
+        <!-- med_wall_s1 -->
+        <collision name="med_wall_s1_col">
+          <pose>12.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="med_wall_s1_vis">
+          <pose>12.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.3 0.8 0.5 1</diffuse></material>
+        </visual>
+        <!-- med_wall_w -->
+        <collision name="med_wall_w_col">
+          <pose>7.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="med_wall_w_vis">
+          <pose>7.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.3 0.8 0.5 1</diffuse></material>
+        </visual>
+        <!-- med_cross_v -->
+        <collision name="med_cross_v_col">
+          <pose>11.00 11.00 0.60 0 0 0</pose>
+          <geometry><box><size>0.30 1.20 1.20</size></box></geometry>
+        </collision>
+        <visual name="med_cross_v_vis">
+          <pose>11.00 11.00 0.60 0 0 0</pose>
+          <geometry><box><size>0.30 1.20 1.20</size></box></geometry>
+          <material><diffuse>0.1 0.8 0.2 1</diffuse></material>
+        </visual>
+        <!-- med_cross_h -->
+        <collision name="med_cross_h_col">
+          <pose>11.00 11.00 0.60 0 0 0</pose>
+          <geometry><box><size>1.20 0.30 1.20</size></box></geometry>
+        </collision>
+        <visual name="med_cross_h_vis">
+          <pose>11.00 11.00 0.60 0 0 0</pose>
+          <geometry><box><size>1.20 0.30 1.20</size></box></geometry>
+          <material><diffuse>0.1 0.8 0.2 1</diffuse></material>
+        </visual>
+        <!-- restr_wall_e -->
+        <collision name="restr_wall_e_col">
+          <pose>15.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 7.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="restr_wall_e_vis">
+          <pose>15.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 7.00 1.80</size></box></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <!-- restr_wall_n -->
+        <collision name="restr_wall_n_col">
+          <pose>11.00 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="restr_wall_n_vis">
+          <pose>11.00 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <!-- restr_wall_s -->
+        <collision name="restr_wall_s_col">
+          <pose>11.00 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="restr_wall_s_vis">
+          <pose>11.00 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <!-- restr_barrier -->
+        <collision name="restr_barrier_col">
+          <pose>7.00 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.30 4.00 1.00</size></box></geometry>
+        </collision>
+        <visual name="restr_barrier_vis">
+          <pose>7.00 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.30 4.00 1.00</size></box></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_wall_e -->
+        <collision name="chem_wall_e_col">
+          <pose>15.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="chem_wall_e_vis">
+          <pose>15.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_wall_s -->
+        <collision name="chem_wall_s_col">
+          <pose>11.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="chem_wall_s_vis">
+          <pose>11.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_wall_n1 -->
+        <collision name="chem_wall_n1_col">
+          <pose>12.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="chem_wall_n1_vis">
+          <pose>12.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_wall_w -->
+        <collision name="chem_wall_w_col">
+          <pose>7.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="chem_wall_w_vis">
+          <pose>7.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_drum1 -->
+        <collision name="chem_drum1_col">
+          <pose>11.00 -11.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.80 0.80 1.00</size></box></geometry>
+        </collision>
+        <visual name="chem_drum1_vis">
+          <pose>11.00 -11.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.80 0.80 1.00</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- chem_drum2 -->
+        <collision name="chem_drum2_col">
+          <pose>13.00 -13.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.80 0.80 1.00</size></box></geometry>
+        </collision>
+        <visual name="chem_drum2_vis">
+          <pose>13.00 -13.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.80 0.80 1.00</size></box></geometry>
+          <material><diffuse>0.8 0.6 0.1 1</diffuse></material>
+        </visual>
+        <!-- srv_wall_w -->
+        <collision name="srv_wall_w_col">
+          <pose>-15.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="srv_wall_w_vis">
+          <pose>-15.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.2 0.4 0.8 1</diffuse></material>
+        </visual>
+        <!-- srv_wall_n -->
+        <collision name="srv_wall_n_col">
+          <pose>-11.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="srv_wall_n_vis">
+          <pose>-11.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.2 0.4 0.8 1</diffuse></material>
+        </visual>
+        <!-- srv_wall_s1 -->
+        <collision name="srv_wall_s1_col">
+          <pose>-12.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="srv_wall_s1_vis">
+          <pose>-12.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.2 0.4 0.8 1</diffuse></material>
+        </visual>
+        <!-- srv_wall_e -->
+        <collision name="srv_wall_e_col">
+          <pose>-7.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="srv_wall_e_vis">
+          <pose>-7.00 11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.2 0.4 0.8 1</diffuse></material>
+        </visual>
+        <!-- srv_rack1 -->
+        <collision name="srv_rack1_col">
+          <pose>-11.00 11.00 0.70 0 0 0</pose>
+          <geometry><box><size>0.80 3.50 1.40</size></box></geometry>
+        </collision>
+        <visual name="srv_rack1_vis">
+          <pose>-11.00 11.00 0.70 0 0 0</pose>
+          <geometry><box><size>0.80 3.50 1.40</size></box></geometry>
+          <material><diffuse>0.2 0.2 0.25 1</diffuse></material>
+        </visual>
+        <!-- srv_rack2 -->
+        <collision name="srv_rack2_col">
+          <pose>-13.00 11.00 0.70 0 0 0</pose>
+          <geometry><box><size>0.80 3.50 1.40</size></box></geometry>
+        </collision>
+        <visual name="srv_rack2_vis">
+          <pose>-13.00 11.00 0.70 0 0 0</pose>
+          <geometry><box><size>0.80 3.50 1.40</size></box></geometry>
+          <material><diffuse>0.2 0.2 0.25 1</diffuse></material>
+        </visual>
+        <!-- wrk_wall_w -->
+        <collision name="wrk_wall_w_col">
+          <pose>-15.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 7.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="wrk_wall_w_vis">
+          <pose>-15.00 0.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 7.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wrk_wall_n -->
+        <collision name="wrk_wall_n_col">
+          <pose>-11.00 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="wrk_wall_n_vis">
+          <pose>-11.00 3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wrk_wall_s -->
+        <collision name="wrk_wall_s_col">
+          <pose>-11.00 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="wrk_wall_s_vis">
+          <pose>-11.00 -3.50 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wrk_wall_e1 -->
+        <collision name="wrk_wall_e1_col">
+          <pose>-7.00 -2.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="wrk_wall_e1_vis">
+          <pose>-7.00 -2.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wrk_wall_e2 -->
+        <collision name="wrk_wall_e2_col">
+          <pose>-7.00 2.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="wrk_wall_e2_vis">
+          <pose>-7.00 2.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 2.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wrk_bench -->
+        <collision name="wrk_bench_col">
+          <pose>-11.00 0.00 0.45 0 0 0</pose>
+          <geometry><box><size>2.00 1.20 0.90</size></box></geometry>
+        </collision>
+        <visual name="wrk_bench_vis">
+          <pose>-11.00 0.00 0.45 0 0 0</pose>
+          <geometry><box><size>2.00 1.20 0.90</size></box></geometry>
+          <material><diffuse>0.6 0.4 0.2 1</diffuse></material>
+        </visual>
+        <!-- wh_wall_w -->
+        <collision name="wh_wall_w_col">
+          <pose>-15.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="wh_wall_w_vis">
+          <pose>-15.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wh_wall_s -->
+        <collision name="wh_wall_s_col">
+          <pose>-11.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="wh_wall_s_vis">
+          <pose>-11.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>8.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wh_wall_n1 -->
+        <collision name="wh_wall_n1_col">
+          <pose>-12.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="wh_wall_n1_vis">
+          <pose>-12.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>5.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wh_wall_e -->
+        <collision name="wh_wall_e_col">
+          <pose>-7.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="wh_wall_e_vis">
+          <pose>-7.00 -11.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 8.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- wh_shelf1 -->
+        <collision name="wh_shelf1_col">
+          <pose>-12.00 -11.00 0.80 0 0 0</pose>
+          <geometry><box><size>1.00 4.00 1.60</size></box></geometry>
+        </collision>
+        <visual name="wh_shelf1_vis">
+          <pose>-12.00 -11.00 0.80 0 0 0</pose>
+          <geometry><box><size>1.00 4.00 1.60</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <!-- wh_shelf2 -->
+        <collision name="wh_shelf2_col">
+          <pose>-10.00 -11.00 0.80 0 0 0</pose>
+          <geometry><box><size>1.00 4.00 1.60</size></box></geometry>
+        </collision>
+        <visual name="wh_shelf2_vis">
+          <pose>-10.00 -11.00 0.80 0 0 0</pose>
+          <geometry><box><size>1.00 4.00 1.60</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <!-- conf_wall_n -->
+        <collision name="conf_wall_n_col">
+          <pose>0.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>6.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="conf_wall_n_vis">
+          <pose>0.00 15.00 0.90 0 0 0</pose>
+          <geometry><box><size>6.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- conf_wall_w -->
+        <collision name="conf_wall_w_col">
+          <pose>-3.00 12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="conf_wall_w_vis">
+          <pose>-3.00 12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- conf_wall_e -->
+        <collision name="conf_wall_e_col">
+          <pose>3.00 12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="conf_wall_e_vis">
+          <pose>3.00 12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- conf_wall_sw -->
+        <collision name="conf_wall_sw_col">
+          <pose>-2.00 9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="conf_wall_sw_vis">
+          <pose>-2.00 9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- conf_wall_se -->
+        <collision name="conf_wall_se_col">
+          <pose>2.00 9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="conf_wall_se_vis">
+          <pose>2.00 9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- conf_table -->
+        <collision name="conf_table_col">
+          <pose>0.00 12.00 0.40 0 0 0</pose>
+          <geometry><box><size>1.60 2.40 0.80</size></box></geometry>
+        </collision>
+        <visual name="conf_table_vis">
+          <pose>0.00 12.00 0.40 0 0 0</pose>
+          <geometry><box><size>1.60 2.40 0.80</size></box></geometry>
+          <material><diffuse>0.5 0.3 0.2 1</diffuse></material>
+        </visual>
+        <!-- maint_wall_s -->
+        <collision name="maint_wall_s_col">
+          <pose>0.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>6.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="maint_wall_s_vis">
+          <pose>0.00 -15.00 0.90 0 0 0</pose>
+          <geometry><box><size>6.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- maint_wall_w -->
+        <collision name="maint_wall_w_col">
+          <pose>-3.00 -12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="maint_wall_w_vis">
+          <pose>-3.00 -12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- maint_wall_e -->
+        <collision name="maint_wall_e_col">
+          <pose>3.00 -12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+        </collision>
+        <visual name="maint_wall_e_vis">
+          <pose>3.00 -12.00 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 6.00 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- maint_wall_nw -->
+        <collision name="maint_wall_nw_col">
+          <pose>-2.00 -9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="maint_wall_nw_vis">
+          <pose>-2.00 -9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- maint_wall_ne -->
+        <collision name="maint_wall_ne_col">
+          <pose>2.00 -9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="maint_wall_ne_vis">
+          <pose>2.00 -9.00 0.90 0 0 0</pose>
+          <geometry><box><size>2.00 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- break_w -->
+        <collision name="break_w_col">
+          <pose>3.50 5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+        </collision>
+        <visual name="break_w_vis">
+          <pose>3.50 5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- break_n -->
+        <collision name="break_n_col">
+          <pose>5.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="break_n_vis">
+          <pose>5.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- sec_e -->
+        <collision name="sec_e_col">
+          <pose>-3.50 5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+        </collision>
+        <visual name="sec_e_vis">
+          <pose>-3.50 5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- sec_n -->
+        <collision name="sec_n_col">
+          <pose>-5.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="sec_n_vis">
+          <pose>-5.50 7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- arch_w -->
+        <collision name="arch_w_col">
+          <pose>3.50 -5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+        </collision>
+        <visual name="arch_w_vis">
+          <pose>3.50 -5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- arch_s -->
+        <collision name="arch_s_col">
+          <pose>5.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="arch_s_vis">
+          <pose>5.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- lab_e -->
+        <collision name="lab_e_col">
+          <pose>-3.50 -5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+        </collision>
+        <visual name="lab_e_vis">
+          <pose>-3.50 -5.50 0.90 0 0 0</pose>
+          <geometry><box><size>0.25 3.50 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- lab_s -->
+        <collision name="lab_s_col">
+          <pose>-5.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+        </collision>
+        <visual name="lab_s_vis">
+          <pose>-5.50 -7.00 0.90 0 0 0</pose>
+          <geometry><box><size>3.50 0.25 1.80</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <!-- corr_pil_n -->
+        <collision name="corr_pil_n_col">
+          <pose>0.00 6.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+        </collision>
+        <visual name="corr_pil_n_vis">
+          <pose>0.00 6.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <!-- corr_pil_s -->
+        <collision name="corr_pil_s_col">
+          <pose>0.00 -6.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+        </collision>
+        <visual name="corr_pil_s_vis">
+          <pose>0.00 -6.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <!-- corr_pil_e -->
+        <collision name="corr_pil_e_col">
+          <pose>5.50 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+        </collision>
+        <visual name="corr_pil_e_vis">
+          <pose>5.50 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+        <!-- corr_pil_w -->
+        <collision name="corr_pil_w_col">
+          <pose>-5.50 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+        </collision>
+        <visual name="corr_pil_w_vis">
+          <pose>-5.50 0.00 0.50 0 0 0</pose>
+          <geometry><box><size>0.50 0.50 1.00</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.45 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

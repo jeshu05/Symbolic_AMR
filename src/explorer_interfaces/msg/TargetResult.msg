@@ -1,0 +1,5 @@
+uint32 target_id
+geometry_msgs/PoseStamped pose
+bool success
+string error_msg
+float64 execution_time_seconds

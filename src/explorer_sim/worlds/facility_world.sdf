@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="facility_world">
+    <physics name="1ms" type="ode">
+      <max_step_size>0.003</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <light name="sun" type="directional">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>30 30</size></plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>30 30</size></plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Facility Structure Model -->
+    <model name="facility_walls">
+      <static>true</static>
+      
+      <!-- Outer Boundary Walls -->
+      <link name="outer_walls">
+        <!-- North Wall -->
+        <collision name="wall_n_col">
+          <pose>0 5 0.75 0 0 0</pose>
+          <geometry><box><size>12.2 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_n_vis">
+          <pose>0 5 0.75 0 0 0</pose>
+          <geometry><box><size>12.2 0.2 1.5</size></box></geometry>
+          <material><diffuse>0.6 0.6 0.65 1</diffuse></material>
+        </visual>
+
+        <!-- South Wall -->
+        <collision name="wall_s_col">
+          <pose>0 -5 0.75 0 0 0</pose>
+          <geometry><box><size>12.2 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_s_vis">
+          <pose>0 -5 0.75 0 0 0</pose>
+          <geometry><box><size>12.2 0.2 1.5</size></box></geometry>
+          <material><diffuse>0.6 0.6 0.65 1</diffuse></material>
+        </visual>
+
+        <!-- East Wall -->
+        <collision name="wall_e_col">
+          <pose>6 0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_e_vis">
+          <pose>6 0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 1.5</size></box></geometry>
+          <material><diffuse>0.6 0.6 0.65 1</diffuse></material>
+        </visual>
+
+        <!-- West Wall -->
+        <collision name="wall_w_col">
+          <pose>-6 0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_w_vis">
+          <pose>-6 0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 10.2 1.5</size></box></geometry>
+          <material><diffuse>0.6 0.6 0.65 1</diffuse></material>
+        </visual>
+
+        <!-- Interior Divider Walls & Rooms -->
+        <!-- Wall separating Room 2 (Medical: x>2, y<-1) with Doorway at x=2.5 -->
+        <collision name="wall_med_h1">
+          <pose>4.5 -1.0 0.75 0 0 0</pose>
+          <geometry><box><size>3.0 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_med_h1_vis">
+          <pose>4.5 -1.0 0.75 0 0 0</pose>
+          <geometry><box><size>3.0 0.2 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <collision name="wall_med_v">
+          <pose>1.5 -3.0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 3.8 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_med_v_vis">
+          <pose>1.5 -3.0 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 3.8 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+
+        <!-- Wall separating Room 3 (Storage: x<-2, y>1) with Doorway at y=1.5 -->
+        <collision name="wall_store_h">
+          <pose>-4.0 1.0 0.75 0 0 0</pose>
+          <geometry><box><size>3.8 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_store_h_vis">
+          <pose>-4.0 1.0 0.75 0 0 0</pose>
+          <geometry><box><size>3.8 0.2 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+        <collision name="wall_store_v">
+          <pose>-2.0 3.2 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 3.4 1.5</size></box></geometry>
+        </collision>
+        <visual name="wall_store_v_vis">
+          <pose>-2.0 3.2 0.75 0 0 0</pose>
+          <geometry><box><size>0.2 3.4 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.75 1</diffuse></material>
+        </visual>
+
+        <!-- Room 4 (Restricted Zone Alpha): Marked boundary pillars at x in [2.5, 4.5], y in [1.5, 3.5] -->
+        <collision name="restr_p1">
+          <pose>2.5 1.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+        </collision>
+        <visual name="restr_p1_vis">
+          <pose>2.5 1.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <collision name="restr_p2">
+          <pose>4.5 1.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+        </collision>
+        <visual name="restr_p2_vis">
+          <pose>4.5 1.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <collision name="restr_p3">
+          <pose>2.5 3.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+        </collision>
+        <visual name="restr_p3_vis">
+          <pose>2.5 3.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+        <collision name="restr_p4">
+          <pose>4.5 3.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+        </collision>
+        <visual name="restr_p4_vis">
+          <pose>4.5 3.5 0.5 0 0 0</pose>
+          <geometry><cylinder><radius>0.15</radius><length>1.0</length></cylinder></geometry>
+          <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+        </visual>
+
+        <!-- Obstacle pillar in central corridor -->
+        <collision name="obs_pillar">
+          <pose>-0.5 2.0 0.5 0 0 0</pose>
+          <geometry><box><size>0.6 0.6 1.0</size></box></geometry>
+        </collision>
+        <visual name="obs_pillar_vis">
+          <pose>-0.5 2.0 0.5 0 0 0</pose>
+          <geometry><box><size>0.6 0.6 1.0</size></box></geometry>
+          <material><diffuse>0.4 0.4 0.4 1</diffuse></material>
+        </visual>
+
+      </link>
+    </model>
+
+  </world>
+</sdf>

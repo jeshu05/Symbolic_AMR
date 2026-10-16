@@ -1,0 +1,10 @@
+std_msgs/Header header
+string mission_id
+string state
+string[] completed_objectives
+string[] pending_objectives
+float64 remaining_energy_percent
+bool return_route_feasible
+uint32 frontiers_evaluated
+uint32 goals_reached
+uint32 goals_failed

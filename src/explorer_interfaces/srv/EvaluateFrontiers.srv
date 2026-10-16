@@ -1,0 +1,5 @@
+ExplorationTarget[] candidate_targets
+---
+ExplorationTarget selected_target
+DecisionExplanation explanation
+bool target_found

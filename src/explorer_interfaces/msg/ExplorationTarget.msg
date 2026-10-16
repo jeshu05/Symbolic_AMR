@@ -1,0 +1,9 @@
+uint32 target_id
+geometry_msgs/PoseStamped pose
+float64 expected_info_gain
+float64 travel_distance
+float64 estimated_risk
+float64 mission_relevance
+float64 total_utility
+bool is_safe
+string rejection_reason

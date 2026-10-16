@@ -1,0 +1,14 @@
+std_msgs/Header header
+ExplorationTarget selected_target
+string mission_objective
+float64 mission_relevance_score
+float64 information_gain_score
+float64 travel_cost
+float64 risk_estimate
+string[] hard_constraint_results
+bool resource_feasible
+SymbolicFact[] supporting_facts
+string[] inference_rules
+ExplorationTarget[] rejected_alternatives
+string[] rejection_reasons
+string selection_reason

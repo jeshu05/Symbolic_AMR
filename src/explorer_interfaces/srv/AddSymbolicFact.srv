@@ -1,0 +1,4 @@
+SymbolicFact fact
+---
+bool success
+string message
