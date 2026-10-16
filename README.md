@@ -1,6 +1,6 @@
 # Symbolic Autonomous Exploration and Mission Reasoning 2.0 (Symbolic Explorer)
 
-A research-grade ROS 2 autonomous exploration and symbolic mission reasoning system running in WSL2 Ubuntu 24.04 with ROS 2 Jazzy and Gazebo Harmonic (8.15.0). The system explores initially unknown indoor facilities, reasons about mission objectives and epistemic provenance under open-world semantics, enforces hard safety gates, executes physical navigation via Nav2, dynamically adapts to route blockages, and generates traceable explanations for every decision.
+A ROS 2 autonomous exploration and symbolic mission reasoning system running in WSL2 Ubuntu 24.04 with ROS 2 Jazzy and Gazebo Harmonic (8.15.0). The system explores initially unknown indoor facilities, reasons about mission objectives and epistemic provenance under open-world semantics, enforces hard safety gates, executes physical navigation via Nav2, dynamically adapts to route blockages, and generates traceable explanations for every decision.
 
 ---
 
